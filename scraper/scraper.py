@@ -21,3 +21,4 @@ def get_json(url):
 def scrape(endpoint):
     file = open("resources/" + endpoint + ".json", "w")
     file.write(get_json(endpoints[endpoint]))
+
