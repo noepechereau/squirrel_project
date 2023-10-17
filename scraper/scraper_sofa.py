@@ -79,7 +79,7 @@ def get_odds(odds_info, file):
                 id["team2"].update(odds2)
                 odds_final["events"].append(id)
     file = open("resources/" + file + ".json", "w")
-    file.write(str(odds_final))
+    file.write(json.dumps(odds_final))
 
 
 def test():
