@@ -10,15 +10,16 @@ headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Geck
 
 tomorrow = datetime.date.today() + datetime.timedelta(days=2)
 tomorrow_str = tomorrow.strftime("%Y-%m-%d")
-print(tomorrow_str)
 endpoint = {
     "all_id": "https://api.sofascore.com/api/v1/sport/football/scheduled-events/" + tomorrow_str,
 }
 
 
-def get_id(endpoints, odds_info):
+def get_id(endpoints):
+    odds_info = {
+        "events": [],
+    }
     data = json.loads((requests.get(endpoint[endpoints], headers=headers)).text)
-    # print(data)
     for event in data["events"]:
         team1_name = event["homeTeam"]["name"]
         team2_name = event["awayTeam"]["name"]
@@ -59,7 +60,7 @@ def get_odds(odds_info, file):
             else:
                 actual2 = "NULL"
                 expected2 = "NULL"
-            if (actual1 == "NULL" or actual2 == "NULL") or (actual1 > expected1 and actual2 < expected2) or (
+            if ((actual1 == "NULL" and actual2 < expected2) or (actual2 == "NULL" and actual1 > expected1)) or (actual1 > expected1 and actual2 < expected2) or (
                     actual1 < expected1 and actual2 > expected2):
                 odds1 = {
                     "odds": {
