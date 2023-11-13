@@ -2,6 +2,7 @@ import json
 import requests
 import datetime
 from translation.translation import translate
+from datetime import datetime
 
 headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0',
            'Accept': '*/*', 'Accept-Language': 'en-CA,en-US;q=0.7,en;q=0.3', 'Referer': 'https://www.sofascore.com/',
