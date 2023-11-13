@@ -49,7 +49,6 @@ def get_odds(odds_info, file):
     odds_final = {
         "events": []
     }
-    # print(odds_info["events"])
     for id in odds_info["events"]:
         req = requests.get("https://api.sofascore.com/api/v1/event/" + str(id["id"]) + "/provider/1/winning-odds",
                            headers=headers)
@@ -81,15 +80,8 @@ def get_odds(odds_info, file):
                         "expected": expected2
                     }
                 }
-                # print(id)
                 id["team1"].update(odds1)
                 id["team2"].update(odds2)
                 odds_final["events"].append(id)
     file = open("resources/" + file + ".json", "w")
     file.write(json.dumps(odds_final))
-
-
-def test():
-    req = requests.get("https://api.sofascore.com/api/v1/event/10752533/provider/1/winning-odds",
-                       headers=headers)
-    print(req.status_code)

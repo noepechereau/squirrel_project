@@ -20,7 +20,6 @@ def translate(name):
     with open("translation/translations.json", "r") as file:
         content = file.read()
     try:
-        # print(name + " --> " + json.loads(content)[name])
         res = json.loads(content)[name]
     except:
         return ""

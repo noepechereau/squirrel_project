@@ -4,7 +4,6 @@ import json
 def calculate_team_to_bet():
     with open("resources/json_id.json", "r") as file:
         data = json.loads(file.read())
-        print(data)
     for i in range(len(data["events"])):
         if data["events"][i]["team1"]["odds"] is None or data["events"][i]["team1"]["odds"]["actual"] == "NULL":
             data["events"][i].update({"winner": data["events"][i]["team2"]["name"]})
