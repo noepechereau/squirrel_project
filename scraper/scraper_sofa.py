@@ -22,20 +22,24 @@ def get_id(endpoints):
     }
     data = json.loads((requests.get(endpoint[endpoints], headers=headers)).text)
     for event in data["events"]:
-        team1_name = event["homeTeam"]["name"]
-        team2_name = event["awayTeam"]["name"]
-        id = event["id"]
+        t = event["time"]["currentPeriodStartTimestamp"]
+        dt_object = datetime.fromtimestamp(t)
+        dt_object = str(dt_object).split(" ")[0]
+        if (dt_object == tomorrow_str):
+            team1_name = event["homeTeam"]["name"]
+            team2_name = event["awayTeam"]["name"]
+            id = event["id"]
 
-        event_info = {
-            "team1": {
-                "name": translate(team1_name),
-            },
-            "team2": {
-                "name": translate(team2_name),
-            },
-            "id": id
-        }
-        odds_info["events"].append(event_info)
+            event_info = {
+                "team1": {
+                    "name": translate(team1_name),
+                },
+                "team2": {
+                    "name": translate(team2_name),
+                },
+                "id": id
+            }
+            odds_info["events"].append(event_info)
     return odds_info
 
 
