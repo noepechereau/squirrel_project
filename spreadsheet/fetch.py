@@ -7,10 +7,9 @@ def fetch(targets):
     scrape_wina("football")
     with open("resources/football.json", "r") as file:
         data = json.loads(file.read())
-
     res = []
     matches = data["matches"]
-    print(len(targets["events"]))
+    print(targets["events"])
     for match_id in matches:
         match = matches[match_id]
         for target in targets["events"]:

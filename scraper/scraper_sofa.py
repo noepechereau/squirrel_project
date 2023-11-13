@@ -23,7 +23,7 @@ def get_id(endpoints):
     }
     data = json.loads((requests.get(endpoint[endpoints], headers=headers)).text)
     for event in data["events"]:
-        t = event["time"]["currentPeriodStartTimestamp"]
+        t = event["startTimestamp"]
         dt_object = dt.fromtimestamp(t)
         dt_object = str(dt_object).split(" ")[0]
         if (dt_object == tomorrow_str):
