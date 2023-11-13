@@ -2,7 +2,7 @@ import json
 import requests
 import datetime
 from translation.translation import translate
-from datetime import datetime
+from datetime import datetime as dt
 
 headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0',
            'Accept': '*/*', 'Accept-Language': 'en-CA,en-US;q=0.7,en;q=0.3', 'Referer': 'https://www.sofascore.com/',
@@ -24,7 +24,7 @@ def get_id(endpoints):
     data = json.loads((requests.get(endpoint[endpoints], headers=headers)).text)
     for event in data["events"]:
         t = event["time"]["currentPeriodStartTimestamp"]
-        dt_object = datetime.fromtimestamp(t)
+        dt_object = dt.fromtimestamp(t)
         dt_object = str(dt_object).split(" ")[0]
         if (dt_object == tomorrow_str):
             team1_name = event["homeTeam"]["name"]
