@@ -9,6 +9,7 @@ def fetch(targets):
         data = json.loads(file.read())
     res = []
     matches = data["matches"]
+    print()
     print(targets["events"])
     for match_id in matches:
         match = matches[match_id]

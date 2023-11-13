@@ -41,6 +41,7 @@ def get_id(endpoints):
                 "id": id
             }
             odds_info["events"].append(event_info)
+    print(odds_info)
     return odds_info
 
 
