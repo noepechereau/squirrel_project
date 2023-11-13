@@ -1,6 +1,7 @@
 import json
 import requests
 import datetime
+from translation.translation import translate
 
 headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0',
            'Accept': '*/*', 'Accept-Language': 'en-CA,en-US;q=0.7,en;q=0.3', 'Referer': 'https://www.sofascore.com/',
@@ -27,10 +28,10 @@ def get_id(endpoints):
 
         event_info = {
             "team1": {
-                "name": team1_name,
+                "name": translate(team1_name),
             },
             "team2": {
-                "name": team2_name,
+                "name": translate(team2_name),
             },
             "id": id
         }

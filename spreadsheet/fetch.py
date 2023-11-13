@@ -10,30 +10,30 @@ def fetch(targets):
 
     res = []
     matches = data["matches"]
+    print(len(targets["events"]))
     for match_id in matches:
         match = matches[match_id]
         for target in targets["events"]:
-            print(target)
             name_a = match["competitor1Name"]
             name_b = match["competitor2Name"]
             if target["team1"]["name"] != name_a or target["team2"]["name"] != name_b:
                 continue
 
-            m = {"league": data["tournaments"][str(match["tournamentId"])]["tournamentName"]}
+            m = [data["tournaments"][str(match["tournamentId"])]["tournamentName"]]
             if name_a == target["winner"]:
-                m["winner"] = name_a
-                m["loser"] = name_b
-                m["winner_odd"] = data["odds"][str(data["bets"][str(match["mainBetId"])])][0]
-                m["loser_odd"] = data["odds"][str(data["bets"][str(match["mainBetId"])])][2]
-                m["winner_chance"] = target["team1"]["odds"]["actual"]
-                m["loser_chance"] = target["team2"]["odds"]["actual"]
+                m.append(name_a)
+                m.append(name_b)
+                m.append(data["odds"][str(data["bets"][str(match["mainBetId"])]["outcomes"][0])])
+                m.append(data["odds"][str(data["bets"][str(match["mainBetId"])]["outcomes"][2])])
+                m.append(target["team1"]["odds"]["actual"])
+                m.append(target["team2"]["odds"]["actual"])
             else:
-                m["winner"] = name_b
-                m["loser"] = name_a
-                m["winner_odd"] = data["odds"][str(data["bets"][str(match["mainBetId"])])][2]
-                m["loser_odd"] = data["odds"][str(data["bets"][str(match["mainBetId"])])][0]
-                m["winner_chance"] = target["team2"]["odds"]["actual"]
-                m["loser_chance"] = target["team1"]["odds"]["actual"]
+                m.append(name_b)
+                m.append(name_a)
+                m.append(data["odds"][str(data["bets"][str(match["mainBetId"])]["outcomes"][2])])
+                m.append(data["odds"][str(data["bets"][str(match["mainBetId"])]["outcomes"][0])])
+                m.append(target["team2"]["odds"]["actual"])
+                m.append(target["team1"]["odds"]["actual"])
             res.append(m)
 
     return res

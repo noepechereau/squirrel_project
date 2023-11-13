@@ -10,9 +10,9 @@ def calculate_team_to_bet():
         elif data["events"][i]["team2"]["odds"] is None or data["events"][i]["team2"]["odds"]["actual"] == "NULL":
             data["events"][i].update({"winner": data["events"][i]["team1"]["name"]})
         elif data["events"][i]["team1"]["odds"]["actual"] < data["events"][i]["team1"]["odds"]["expected"]:
-            data["events"][i].update({"winner": data["events"][i]["team1"]["name"]})
-        elif data["events"][i]["team2"]["odds"]["actual"] < data["events"][i]["team2"]["odds"]["expected"]:
             data["events"][i].update({"winner": data["events"][i]["team2"]["name"]})
+        elif data["events"][i]["team2"]["odds"]["actual"] < data["events"][i]["team2"]["odds"]["expected"]:
+            data["events"][i].update({"winner": data["events"][i]["team1"]["name"]})
     file = open("resources/json_id.json", "w")
     file.write(json.dumps(data))
     return data
