@@ -29,7 +29,6 @@ def get_id(endpoints):
         if (dt_object == tomorrow_str):
             team1_name = event["homeTeam"]["name"]
             team2_name = event["awayTeam"]["name"]
-            print(team1_name, team2_name)
             id = event["id"]
 
             event_info = {
@@ -43,7 +42,6 @@ def get_id(endpoints):
             }
             if (event_info["team1"]["name"] != "" and event_info["team2"]["name"] != ""):
                 odds_info["events"].append(event_info)
-    # print(odds_info)
     return odds_info
 
 
