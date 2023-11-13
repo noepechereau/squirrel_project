@@ -10,7 +10,7 @@ headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Geck
            'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Site': 'same-site', 'If-None-Match': 'W/"9abd3b46f3"',
            'Cache-Control': 'max-age=0', 'If-Modified-Since': 'Tues, 18 Jul 2023 00:00:00 GMT'}
 
-tomorrow = datetime.date.today() + datetime.timedelta(days=2)
+tomorrow = datetime.date.today() + datetime.timedelta(days=1)
 tomorrow_str = tomorrow.strftime("%Y-%m-%d")
 endpoint = {
     "all_id": "https://api.sofascore.com/api/v1/sport/football/scheduled-events/" + tomorrow_str,
@@ -29,6 +29,7 @@ def get_id(endpoints):
         if (dt_object == tomorrow_str):
             team1_name = event["homeTeam"]["name"]
             team2_name = event["awayTeam"]["name"]
+            print(team1_name, team2_name)
             id = event["id"]
 
             event_info = {
@@ -40,8 +41,9 @@ def get_id(endpoints):
                 },
                 "id": id
             }
-            odds_info["events"].append(event_info)
-    print(odds_info)
+            if (event_info["team1"]["name"] != "" and event_info["team2"]["name"] != ""):
+                odds_info["events"].append(event_info)
+    # print(odds_info)
     return odds_info
 
 
